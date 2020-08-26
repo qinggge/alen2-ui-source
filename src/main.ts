@@ -2,15 +2,15 @@ import { createApp } from 'vue'
 import App from './App.vue'
 import './index.css'
 import { createWebHashHistory, createRouter } from 'vue-router'
-import Qing from './components/Qing.vue'
-import Qing2 from './components/Qing2.vue'
+import Home from './views/Home.vue'
+import Doc from './views/Doc.vue'
 
 const history = createWebHashHistory();
 const router = createRouter({
   history: history,
   routes: [
-    {path: '/', component: Qing},
-    {path: '/xxx', component: Qing2},
+    {path: '/', component: Home},
+    {path: '/doc', component: Doc},
   ]
 });
 
