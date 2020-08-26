@@ -1,15 +1,11 @@
 <template>
-  <div>hi</div>
-  <Qing/>
+  <div>导航栏 | <router-link to="/">Qing</router-link> | <router-link to="/xxx">Qing2</router-link></div>
+  <hr>
+  <router-view/>
 </template>
 
 <script>
-import Qing from './components/Qing.vue'
-
 export default {
   name: 'App',
-  components: {
-    Qing,
-  }
 }
 </script>
