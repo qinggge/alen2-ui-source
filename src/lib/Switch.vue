@@ -1,5 +1,5 @@
 <template>
-  <button :class="{checked: value}" @click="toggle"><span></span></button>
+  <button class="alen-switch" @click="toggle" :class="{'alen-checked':value}">
 </template>
 <script lang="ts">
 import { ref } from 'vue'
@@ -15,10 +15,10 @@ export default {
   }
 }
 </script>
-<style lang="scss" scoped>
+<style lang="scss">
   $h: 22px;
   $h2: $h - 4px;
-  button{
+  .alen-switch {
     height: $h;
     width: $h*2;
     border: none;
@@ -35,7 +35,7 @@ export default {
       border-radius: $h2 / 2;
       transition: all 250ms;
     }
-    &.checked {
+    &.alen-checked {
       background: #1890ff;
       > span {
         left: calc(100% - #{$h2} - 2px);
@@ -47,7 +47,7 @@ export default {
     &:active{
       > span {width: $h2 + 4px;}
     }
-    &.checked:active{
+    &.alen-checked:active{
       > span {width: $h2 + 4px; margin-left: -4px;}
     }
   }
