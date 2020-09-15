@@ -1,16 +1,31 @@
 <template>
-  <button class="alen-button" :class="{[`alen-${theme}`]: theme}">
+  <button class="alen-button" :class="classes">
     <slot />
   </button>
 </template>
 <script lang="ts">
+import {computed} from 'vue';
 export default {
   props: {
     theme: {
       type: String,
       default: 'button',
     },
-  }
+    size: {
+      type: String,
+      default: 'normal',
+    }
+  },
+  setup(props) {
+    const {theme, size} = props;
+    const classes = computed(() => {
+      return {
+        [`alen-theme-${theme}`]: theme,
+        [`alen-size-${size}`]: size,
+      };
+    });
+    return { classes };
+  },
 }
 </script>
 <style lang="scss">
@@ -47,5 +62,33 @@ $radius: 4px;
   &::-moz-focus-inner {
     border: 0;
   }
+  &.alen-theme-link{
+    border-color: transparent;
+    box-shadow: none;
+    color: $blue;
+    &:hover,&:focus{
+      color: lighten($blue, 10%);
+    }
   }
+  &.alen-theme-text{
+    border-color: transparent;
+    box-shadow: none;
+    color: inherit;
+    &:hover,&:focus{
+      background: darken(white, 5%);;
+    }
+  }
+  &.alen-theme-button{
+    &.alen-size-big{
+      font-size: 24px;
+      height: 48px;
+      padding: 0 16px
+    }
+    &.alen-size-small{
+      font-size: 12px;
+      height: 20px;
+      padding: 0 4px;
+    }
+  }
+}
 </style>
