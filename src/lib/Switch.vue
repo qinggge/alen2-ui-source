@@ -1,5 +1,5 @@
 <template>
-  <button class="alen-switch" @click="toggle" :class="{'alen-checked':value}">
+  <button class="alen-switch" @click="toggle" :class="{'alen-checked':value}"></button>
 </template>
 <script lang="ts">
 import { ref } from 'vue'
