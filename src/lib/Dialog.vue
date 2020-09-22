@@ -1,21 +1,23 @@
 <template>
   <template v-if="visible">
-    <div class="alen-dialog-overlay" @click="onClickOverlay"></div>
-    <div class="alen-dialog-wrapper">
-      <div class="alen-dialog">
-        <header>
-          <slot name="title" />
-          <span class="alen-dialog-close" @click="close"></span>
-        </header>
-        <main>
-          <slot name="content" />
-        </main>
-        <footer>
-          <Button level="main" @click="ok">OK</Button>
-          <Button @click="cancel">Cancel</Button>
-        </footer>
+    <Teleport to="body">
+      <div class="alen-dialog-overlay" @click="onClickOverlay"></div>
+      <div class="alen-dialog-wrapper">
+        <div class="alen-dialog">
+          <header>
+            <slot name="title" />
+            <span class="alen-dialog-close" @click="close"></span>
+          </header>
+          <main>
+            <slot name="content" />
+          </main>
+          <footer>
+            <Button level="main" @click="ok">OK</Button>
+            <Button @click="cancel">Cancel</Button>
+          </footer>
+        </div>
       </div>
-    </div>
+    </Teleport>
   </template>
 </template>
 <script lang="ts">
@@ -55,7 +57,7 @@ export default {
       }
     };
     const cancel = () => {
-      context.emit('cancel')
+      props.cancel?.()
       close()
     };
     return {close, onClickOverlay, ok, cancel}
