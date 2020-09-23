@@ -1,5 +1,7 @@
 <template>
-  <button class="alen-switch" @click="toggle" :class="{'alen-checked':value}"></button>
+  <button class="alen-switch" @click="toggle" :class="{'alen-checked':value}">
+    <span></span>
+  </button>
 </template>
 <script lang="ts">
 import { ref } from 'vue'
@@ -34,6 +36,7 @@ export default {
       background:white;
       border-radius: $h2 / 2;
       transition: all 250ms;
+      cursor: pointer;
     }
     &.alen-checked {
       background: #1890ff;
