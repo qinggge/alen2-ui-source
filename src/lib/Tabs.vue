@@ -1,28 +1,51 @@
 <template>
 <div class="alen-tabs">
   <div class="alen-tabs-nav">
-    <div class="alen-tabs-nav-item" v-for="(t,index) in titles" :key="index">{{t}}</div>
+    <div
+      class="alen-tabs-nav-item"
+      v-for="(t,index) in titles"
+      :key="index"
+      :class="{selected: t === selected}"
+      @click="select(t)"
+    >{{t}}</div>
   </div>
   <div class="alen-tabs-content">
-    <component class="alen-tabs-content-item" v-for="(c,index) in defaults" :is="c" :key="index" />
+    {{current}}
+    <component class="alen-tabs-content-item" :is="current" />
   </div>
 </template>
 
-<script>
+<script lang="ts">
+import { computed } from 'vue';
 import Tab from './Tab.vue';
 export default {
+  props: {
+    selected: {
+      type: String,
+    },
+  },
   setup(props, context) {
     const defaults = context.slots.default();
     defaults.forEach((tag) => {
       if (tag.type !== Tab) {
-        throw new Errow('Tabs 子标签必须是 Tab')
+        throw new Error('Tabs 子标签必须是 Tab')
       }
+    });
+    const current = computed(() => {
+      console.log('重新return');
+      
+      return defaults.filter((tag) => {
+        return tag.props.title === props.selected;
+      })[0];
     });
     const titles = defaults.map((tag) => {
       return tag.props.title;
-    })
+    });
+    const select = (title: string) => {
+      context.emit('update:selected', title)
+    }
     return {
-      defaults, titles
+      defaults, titles, current, select,
     }
   }
 }
