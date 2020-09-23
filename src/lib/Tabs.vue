@@ -10,9 +10,11 @@
     >{{t}}</div>
   </div>
   <div class="alen-tabs-content">
-    {{current}}
-    <component class="alen-tabs-content-item" :is="current" />
+    <component class="alen-tabs-content-item"
+    :class="{selected: c.props.title === selected}"
+    v-for="c in defaults" :is="c" :key="c"/>
   </div>
+</div>
 </template>
 
 <script lang="ts">
@@ -72,8 +74,17 @@ $border-color: #d9d9d9;
       }
     }
   }
+
   &-content {
     padding: 8px 0;
+
+    &-item {
+      display: none;
+      
+      &.selected {
+        display: block;
+      }
+    }
   }
 }
 </style>
