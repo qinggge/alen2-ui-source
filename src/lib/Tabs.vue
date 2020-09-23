@@ -11,9 +11,7 @@
     <div class="alen-tabs-nav-indicator" ref="indicator"></div>
   </div>
   <div class="alen-tabs-content">
-    <component class="alen-tabs-content-item"
-    :class="{selected: c.props.title === selected}"
-    v-for="c in defaults" :is="c" :key="c"/>
+    <component class="alen-tabs-content-item" :is="current" :key="current.props.title" />
   </div>
 </div>
 </template>
@@ -47,6 +45,9 @@ export default {
         throw new Error('Tabs 子标签必须是 Tab');
       }
     });
+    const current = computed(() => {
+      return defaults.find(tag => tag.props.title === props.selected)
+    });
     const titles = defaults.map((tag) => {
       return tag.props.title;
     });
@@ -54,7 +55,7 @@ export default {
       context.emit('update:selected', title)
     };
     return {
-      defaults, titles, select, indicator, container, selectedItem,
+      defaults, titles, select, indicator, container, selectedItem, current,
     };
   }
 }
@@ -95,14 +96,6 @@ $border-color: #d9d9d9;
 
   &-content {
     padding: 8px 0;
-
-    &-item {
-      display: none;
-      
-      &.selected {
-        display: block;
-      }
-    }
   }
 }
 </style>
