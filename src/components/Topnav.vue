@@ -1,9 +1,11 @@
 <template>
   <div class="topnav">
     <div class="logo">
-      <svg class="icon">
-        <use xlink:href="#icon-alen"></use>
-      </svg>
+      <router-link to="/">
+        <svg class="icon">
+          <use xlink:href="#icon-alen"></use>
+        </svg>
+      </router-link>
     </div>
     <ul class="menu">
       <li>
@@ -44,13 +46,13 @@ $color: #007974;
   top: 0;
   left: 0;
   width: 100%;
-  z-index: 10;
+  z-index: 20;
   justify-content: center;
   align-items: center;
   > .logo {
     max-width: 6em;
     margin-right: auto;
-    > svg {
+    svg {
       width: 32px;
       height: 32px;
     }
