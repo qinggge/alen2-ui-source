@@ -6,7 +6,7 @@
       v-for="(t,index) in titles"
       :key="index"
       :class="{selected: t === selected}"
-      :ref="el => { if (t===selected) selectedItem = el }" @click="select(t)"
+      :ref="el => { if (t === selected) selectedItem = el }" @click="select(t)"
     >{{t}}</div>
     <div class="alen-tabs-nav-indicator" ref="indicator"></div>
   </div>
