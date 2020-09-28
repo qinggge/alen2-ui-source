@@ -4,6 +4,7 @@
     <div class="demo">
       <h2>常规用法</h2>
       <div class="demo-component">
+        <component :is="SwitchDemo1">
         <SwitchDemo1 />
       </div>
       <div class="demo-actions">
@@ -16,7 +17,7 @@
     <div class="demo">
       <h2>支持 disabled </h2>
       <div class="demo-component">
-        <SwitchDemo2 />
+        <component :is="SwitchDemo2">
       </div>
       <div class="demo-actions">
         <Button>查看代码</Button>
