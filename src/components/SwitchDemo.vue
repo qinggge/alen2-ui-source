@@ -18,9 +18,8 @@ export default {
     Demo,
   },
   setup() {
-    const bool = ref(false);
     return {
-      bool, SwitchDemo1, SwitchDemo2,
+      SwitchDemo1, SwitchDemo2,
     }
   }
 }
