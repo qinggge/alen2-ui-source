@@ -12,7 +12,7 @@ export default {
     globals: {
       vue: 'Vue'
     },
-    name: 'alen',
+    name: 'alen-ui-1',
     file: 'dist/lib/alen.js',
     format: 'umd',
     plugins: [terser()]
