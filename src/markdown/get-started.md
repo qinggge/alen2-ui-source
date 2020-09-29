@@ -5,7 +5,7 @@
 然后在你的项目中写入下面的代码。  
   
 ```javascript
-import { Button, Tabs, Switch, Dialog } from alen2-ui
+import { Button, Tabs, Tab, Switch, Dialog, openDialog } from alen-ui-1
 ```  
   
 就可以使用我提供的组件了。  
@@ -19,7 +19,7 @@ http
   <div><Button>按钮</Button></div>
 </template>
 <script>
-  import { Button } from 'alen2-ui'
+  import { Button } from 'alen-ui-1'
   export default {
     components: { Button },
   }

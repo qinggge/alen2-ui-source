@@ -3,11 +3,11 @@
 打开终端运行以下命令：  
 
 ```
-npm install alen2-ui
+npm install alen-ui-1
 
 // 或
 
-yarn add alen2-ui
+yarn add alen-ui-1
 ```  
   
 下一节：[开始使用](#/doc/get-started)
