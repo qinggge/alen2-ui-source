@@ -9,7 +9,7 @@
     </div>
     <ul class="menu">
       <li>
-        <span id="butInstall">安装</span>
+        <span id="butInstall">安装 PWA</span>
       </li>
       <li>
         <router-link to="/doc">文档</router-link>
