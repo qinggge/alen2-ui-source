@@ -38,15 +38,15 @@
   </div>
 </template>
 <script lang="ts">
-import Topnav from '../components/Topnav.vue'
-import { inject, Ref } from 'vue';
+import Topnav from "../components/Topnav.vue";
+import { inject, Ref } from "vue";
 export default {
-  components: {Topnav},
+  components: { Topnav },
   setup() {
-    const menuVisible = inject<Ref<boolean>>('menuVisible'); // get
-    return {menuVisible}
+    const menuVisible = inject<Ref<boolean>>("menuVisible"); // get
+    return { menuVisible };
   },
-}
+};
 </script>
 <style lang="scss" scoped>
 $aside-index: 10;
@@ -63,7 +63,7 @@ $aside-index: 10;
     padding-top: 60px;
     padding-left: 156px;
     @media (max-width: 500px) {
-      padding-left: 0; 
+      padding-left: 0;
     }
   }
 }

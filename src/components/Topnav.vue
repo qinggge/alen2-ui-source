@@ -9,6 +9,9 @@
     </div>
     <ul class="menu">
       <li>
+        <span id="butInstall">安装</span>
+      </li>
+      <li>
         <router-link to="/doc">文档</router-link>
       </li>
     </ul>
@@ -18,7 +21,32 @@
   </div>
 </template>
 <script lang="ts">
-import { inject, Ref } from 'vue'
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", () => {
+    if (process.env.NODE_ENV === "production") {
+      console.log(navigator.serviceWorker);
+      navigator.serviceWorker
+        .register("./service-worker.js")
+        .then((reg) => {
+          console.log("Service worker registered in production.", reg);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    } else {
+      console.log(navigator.serviceWorker);
+      navigator.serviceWorker
+        .register("/service-worker.js")
+        .then((reg) => {
+          console.log("Service worker registered in development.", reg);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
+  });
+}
+import { inject, onMounted, Ref } from "vue";
 export default {
   props: {
     toggleMenuButtonVisible: {
@@ -27,13 +55,41 @@ export default {
     },
   },
   setup() {
-    const menuVisible = inject<Ref<boolean>>('menuVisible'); // get
+    const menuVisible = inject<Ref<boolean>>("menuVisible"); // get
     const toggleMenu = () => {
       menuVisible.value = !menuVisible.value;
-    }
-    return {toggleMenu};
+    };
+    onMounted(() => {
+      let deferredInstallPrompt = null;
+      const installButton = document.querySelector("#butInstall");
+      const saveBeforeInstallPromptEvent = (evt) => {
+        deferredInstallPrompt = evt;
+        installButton.removeAttribute("hidden");
+      };
+      const installPWA = (evt) => {
+        deferredInstallPrompt.prompt();
+        deferredInstallPrompt.userChoice.then((choice) => {
+          if (choice.outcome === "accepted") {
+            console.log("User accepted the A2HS prompt", choice);
+          } else {
+            console.log("User dismissed the A2HS prompt", choice);
+          }
+          deferredInstallPrompt = null;
+        });
+      };
+      const logAppInstalled = (evt) => {
+        console.log("UI App was installed", evt);
+      };
+      window.addEventListener(
+        "beforeinstallprompt",
+        saveBeforeInstallPromptEvent
+      );
+      installButton.addEventListener("click", installPWA);
+      window.addEventListener("appinstalled", logAppInstalled);
+    });
+    return { toggleMenu };
   },
-}
+};
 </script>
 <style lang="scss" scoped>
 $color: #007974;
@@ -63,6 +119,9 @@ $color: #007974;
     flex-wrap: nowrap;
     > li {
       margin: 0 1em;
+      > #butInstall {
+        cursor: pointer;
+      }
     }
   }
   > .toggleAside {
@@ -75,9 +134,15 @@ $color: #007974;
     display: none;
   }
   @media (max-width: 500px) {
-    > .menu { display: none; }
-    > .logo { margin: 0 auto; }
-    > .toggleAside { display: inline-block; }
+    > .menu {
+      display: none;
+    }
+    > .logo {
+      margin: 0 auto;
+    }
+    > .toggleAside {
+      display: inline-block;
+    }
   }
 }
 </style>
