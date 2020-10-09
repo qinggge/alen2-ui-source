@@ -6,7 +6,7 @@
         <h1>阿轮 UI</h1>
         <h2>一个厉害的 UI 框架</h2>
         <p class="actions">
-          <a href="https://github.com/qinggge/vue3">Github</a>
+          <a href="https://github.com/qinggge/alen2-ui" target="_blank">Github</a>
           <router-link to="/doc">开始</router-link>
         </p>
       </div>
